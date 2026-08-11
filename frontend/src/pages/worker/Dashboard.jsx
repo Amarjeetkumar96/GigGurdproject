@@ -1,6 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiFetch } from '../../api';
+import { useToast } from '../../components/Toast';
+
+// ── Premium Calculator ────────────────────────────────────────────────────────
+const CITY_RISK = { Bangalore: 1.0, Mumbai: 1.2, Delhi: 1.3, Chennai: 1.1, Hyderabad: 1.05 };
+const PremiumCalculator = () => {
+  const [income, setIncome] = useState(5000);
+  const [city, setCity] = useState('Bangalore');
+
+  const tier = income <= 5000 ? { name: 'Basic', base: 40, coverage: 600 }
+    : income <= 8000 ? { name: 'Standard', base: 70, coverage: 840 }
+    : { name: 'Premium', base: 100, coverage: 1200 };
+
+  const riskMult = CITY_RISK[city] || 1.0;
+  const adjustedPremium = Math.round(tier.base * riskMult);
+  const roi = Math.round((tier.coverage / adjustedPremium) * 100) / 100;
+
+  return (
+    <div className="card" style={{ marginBottom: 20, background: 'linear-gradient(135deg, rgba(56,189,248,0.06), rgba(168,85,247,0.06))', borderColor: 'rgba(56,189,248,0.2)' }}>
+      <h3 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: 16 }}>🧮 Premium Calculator</h3>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
+        <div className="form-group">
+          <label className="form-label">Your City</label>
+          <select className="form-input" value={city} onChange={e => setCity(e.target.value)}>
+            {Object.keys(CITY_RISK).map(c => <option key={c}>{c}</option>)}
+          </select>
+        </div>
+        <div className="form-group">
+          <label className="form-label">Weekly Income: ₹{income.toLocaleString('en-IN')}</label>
+          <input type="range" min={1000} max={15000} step={500} value={income}
+            onChange={e => setIncome(Number(e.target.value))}
+            style={{ width: '100%', accentColor: 'var(--accent)', marginTop: 8 }} />
+        </div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+        {[
+          { label: 'Plan', value: tier.name, color: 'var(--accent)' },
+          { label: 'Weekly Premium', value: `₹${adjustedPremium}`, color: 'var(--purple)' },
+          { label: 'Payout/Event', value: `₹${tier.coverage}`, color: 'var(--green)' },
+        ].map((s, i) => (
+          <div key={i} style={{ textAlign: 'center', padding: '10px 8px', background: 'var(--surface)', borderRadius: 8, border: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '1.1rem', fontWeight: 800, color: s.color }}>{s.value}</div>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: 3 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ marginTop: 12, fontSize: '0.75rem', color: 'var(--text-muted)', textAlign: 'center' }}>
+        💡 Coverage ROI: <strong style={{ color: 'var(--yellow)' }}>{roi}×</strong> — for every ₹1 paid, you get ₹{roi} back on a trigger
+      </div>
+    </div>
+  );
+};
 
 const getRiskColor = (level) => level === 'High' ? 'var(--red)' : level === 'Medium' ? 'var(--yellow)' : 'var(--green)';
 
@@ -12,6 +63,7 @@ const WorkerDashboard = () => {
   const [enrolling, setEnrolling] = useState(false);
   const [enrollForm, setEnrollForm] = useState({ name: '', location: 'Bangalore', weekly_income: 5000, work_type: 'Delivery' });
   const navigate = useNavigate();
+  const toast = useToast();
 
   const setField = k => e => setEnrollForm(f => ({ ...f, [k]: e.target.value }));
 
@@ -45,7 +97,7 @@ const WorkerDashboard = () => {
         body: JSON.stringify({ ...enrollForm, weekly_income: parseFloat(enrollForm.weekly_income) })
       });
       await load();
-    } catch (e) { alert(e.message); }
+    } catch (e) { toast.error(e.message || 'Enrollment failed. Please try again.'); }
     finally { setEnrolling(false); }
   };
 
@@ -81,6 +133,9 @@ const WorkerDashboard = () => {
               Get automatic payouts when heavy rain, AQI spikes, heat waves, or government restrictions stop you from working.
             </p>
           </div>
+
+          {/* Premium Calculator */}
+          <PremiumCalculator />
 
           {/* Plan previews */}
           <div className="plan-cards" style={{ marginBottom: 20 }}>
