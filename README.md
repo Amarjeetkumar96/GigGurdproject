@@ -13,3 +13,4 @@ A parametric insurance workflow that uses verified external triggers and auto-st
 - `backend/`: FastAPI backend for triggers and enrollments
 - `ml-models/`: Placeholder ML scripts
 - `docs/`: Additional documentation
+- 
