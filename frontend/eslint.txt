@@ -1,0 +1,140 @@
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\App.jsx
+  55:9  error  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\components\Sidebar.jsx
+  2:10  error  'useLocation' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\AdminDashboard.jsx
+   44:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  42 |
+  43 |     useEffect(() => {
+> 44 |         fetchAdminData();
+     |         ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  45 |         const interval = setInterval(fetchAdminData, 10000);
+  46 |         return () => clearInterval(interval);
+  47 |     }, []);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           react-hooks/set-state-in-effect
+   47:8   warning  React Hook useEffect has a missing dependency: 'fetchAdminData'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              react-hooks/exhaustive-deps
+   69:18  error    'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+  142:18  error    'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  no-unused-vars
+  195:18  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  193 |                     <span style={{ fontSize: '0.8rem', color: 'var(--success)' }}>+12.5% vs last week</span>
+  194 |                 </div>
+> 195 |                 <TrendChart />
+      |                  ^^^^^^^^^^ This component is created during render
+  196 |             </div>
+  197 |
+  198 |             <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr)', gap: '24px' }}>
+
+  73 |     };
+  74 |
+> 75 |     const TrendChart = () => (
+     |                        ^^^^^^^
+> 76 |         <svg viewBox="0:0 400 100" style={{ width: '100%', height: '100px', marginTop: '20px' }}>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 77 |             <polyline
+     …
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 87 |         </svg>
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 88 |     );
+     | ^^^^^^ The component is created during render here
+  89 |
+  90 |     const InteractiveMap = () => (
+  91 |         <svg viewBox="0:0 400 300" style={{ width: '100%', height: '100%', borderRadius: '12px' }}>                                                                                                                                                                                                               react-hooks/static-components
+  251:26  error    Error: Cannot create components during render
+
+Components created during render will reset their state each time they are created. Declare components outside of render.
+
+  249 |                     <h2 style={{ fontSize: '1.25rem', marginBottom: '24px' }}>Trigger Map</h2>
+  250 |                     <div style={{ height: '300px', background: 'rgba(0,0,0,0.3)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)', position: 'relative' }}>
+> 251 |                         <InteractiveMap />
+      |                          ^^^^^^^^^^^^^^ This component is created during render
+  252 |                     </div>
+  253 |                 </div>
+  254 |             </div>
+
+   88 |     );
+   89 |
+>  90 |     const InteractiveMap = () => (
+      |                            ^^^^^^^
+>  91 |         <svg viewBox="0:0 400 300" style={{ width: '100%', height: '100%', borderRadius: '12px' }}>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  92 |             <rect width="400" height="300" fill="rgba(0,0,0,0.2)" rx="12" />
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 127 |         </svg>
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 128 |     );
+      | ^^^^^^ The component is created during render here
+  129 |
+  130 |     const handleClaimAction = async (id, action) => {
+  131 |         const token = localStorage.getItem('token');  react-hooks/static-components
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\WorkerDashboard.jsx
+  40:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  38 |
+  39 |     useEffect(() => {
+> 40 |         fetchWorkerData();
+     |         ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  41 |         const interval = setInterval(fetchWorkerData, 10000);
+  42 |         return () => clearInterval(interval);
+  43 |     }, []);  react-hooks/set-state-in-effect
+  43:8   warning  React Hook useEffect has a missing dependency: 'fetchWorkerData'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+  62:18  error    'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            no-unused-vars
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\Analytics.jsx
+  14:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\ClaimsManagement.jsx
+  24:32  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\FraudPanel.jsx
+  20:32  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\Overview.jsx
+  25:99  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\Transactions.jsx
+  14:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\TriggerSimulator.jsx
+  45:36  warning  React Hook useEffect has a missing dependency: 'loadLogs'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\admin\Workers.jsx
+  15:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\worker\Alerts.jsx
+  21:32  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\worker\Claims.jsx
+  14:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\worker\Dashboard.jsx
+  37:99  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\worker\Payments.jsx
+  21:32  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\bholu\OneDrive\Desktop\guidwire\GigGuard_Project-main\frontend\src\pages\worker\Policy.jsx
+  13:6  warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 23 problems (9 errors, 14 warnings)
+

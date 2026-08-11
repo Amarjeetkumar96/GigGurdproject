@@ -1,0 +1,6 @@
+Ignored: (1060, "Duplicate column name 'city'")
+Executed: ALTER TABLE workers ADD COLUMN work_type VARCHAR(100) DEFAULT 'Delivery'
+Ignored: (1060, "Duplicate column name 'weekly_income'")
+Ignored: (1060, "Duplicate column name 'premium_tier'")
+Executed: ALTER TABLE workers ADD COLUMN fraud_score FLOAT DEFAULT 0.0
+Executed: ALTER TABLE workers ADD COLUMN is_flagged BOOLEAN DEFAULT 0
